@@ -1,4 +1,3 @@
-import {use} from "react";
 import Image from "next/image";
 import {notFound} from "next/navigation";
 
@@ -18,9 +17,9 @@ export async function generateMetadata({params}) {
   }
 }
 
-export default function MealDetailsPage(props) {
-  const params = use(props.params);
-  const meal = getMeal(params.mealSlug);
+export default async function MealDetailsPage({params}) {
+  const {mealSlug} = await params;
+  const meal = getMeal(mealSlug);
 
   if (!meal) {
     notFound();
